@@ -6,7 +6,7 @@
 /*   By: almanuel <almanuel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:58:32 by almanuel          #+#    #+#             */
-/*   Updated: 2024/08/15 17:04:53 by almanuel         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:46:38 by almanuel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,21 @@ void    open_game(t_data *zona, int ix, int iy)
     size_t x;
 
     y = 0;
-    while (y < zona->point->y)
+    while (y < zona->point.y)
     {
         x = 0;
         ix = 0;
-        while (x < zona.point.x)
+        while (x < zona->point.x)
         {
-            if (zona.ptr[y][x] == '1')
-                zona.img = mlx_xpm_file_to_image(zona.mlx, "imagens/parede.xpm", &zona.img_x, &zona.img_y);
-            else if (zona.ptr[y][x] == 'P')
-                zona.img = mlx_xpm_file_to_image(zona.mlx, "imagens/parado.xpm", &zona.img_x, &zona.img_y);
-            else if (zona.ptr[y][x] == 'C')
-                zona.img = mlx_xpm_file_to_image(zona.mlx, "imagens/fruta.xpm", &zona.img_x, &zona.img_y);
+            if (zona->ptr[y][x] == '1')
+                zona->img = mlx_xpm_file_to_image(zona->mlx, "imagens/parede.xpm", &zona->img_x, &zona->img_y);
+            else if (zona->ptr[y][x] == 'P')
+                zona->img = mlx_xpm_file_to_image(zona->mlx, "imagens/parado.xpm", &zona->img_x, &zona->img_y);
+            else if (zona->ptr[y][x] == 'C')
+                zona->img = mlx_xpm_file_to_image(zona->mlx, "imagens/fruta.xpm", &zona->img_x, &zona->img_y);
             else
-                zona.img = mlx_xpm_file_to_image(zona.mlx, "imagens/fundo.xpm", &zona.img_x, &zona.img_y);
-            mlx_put_image_to_window(zona.mlx, zona.mlx_win, zona.img, ix, iy);
+                zona->img = mlx_xpm_file_to_image(zona->mlx, "imagens/fundo.xpm", &zona->img_x, &zona->img_y);
+            mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img, ix, iy);
             x++;
             ix +=50;
         }
