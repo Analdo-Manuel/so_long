@@ -1,7 +1,7 @@
 NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SOURCE = so_long.c
+SOURCE = so_long.c map_handler.c memory_free.c route_verification.c v_componentes.c
 OBJ = ${SOURCE:.c=.o}
 
 all: $(NAME)
