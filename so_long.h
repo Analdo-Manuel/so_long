@@ -6,7 +6,7 @@
 /*   By: almanuel <almanuel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:00:18 by almanuel          #+#    #+#             */
-/*   Updated: 2024/08/16 14:29:48 by almanuel         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:30:37 by almanuel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_data
     size_t  E;
     int     img_x;
     int     img_y;
+    int     ix;
+    int     iy;
     t_point     point;
 }              t_data;
 

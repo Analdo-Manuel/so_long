@@ -6,7 +6,7 @@
 /*   By: almanuel <almanuel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:58:32 by almanuel          #+#    #+#             */
-/*   Updated: 2024/08/16 14:40:27 by almanuel         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:51:05 by almanuel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static
     val_retangulo(zona);
     val_valuer(zona);
     val_components(zona);
-    position(zona, &player, 'P');
     position(zona, &porta, 'P');
+    position(zona, &player, 'P');
     copy_map(zona);
     fool_fill(zona, zona->point, player);
     if (zona->C > 0)
@@ -34,33 +34,32 @@ static
     } 
 }
 
-void    open_game(t_data *zona, int ix, int iy)
+void    open_game(t_data *zona, size_t x, size_t y)
 {
-    size_t y;
-    size_t x;
-
+    zona->ix = 0;
+    zona->iy = 0;
     y = 0;
     while (y < zona->point.y)
     {
         x = 0;
-        ix = 0;
+        zona->ix = 0;
         while (x < zona->point.x)
         {
             if (zona->ptr[y][x] == '1')
-                mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img_wall, ix, iy);
+                mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img_wall, zona->ix, zona->iy);
             else if (zona->ptr[y][x] == 'P')
-                mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img_player, ix, iy);
+                mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img_player, zona->ix, zona->iy);
             else if (zona->ptr[y][x] == 'C')
-                mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img_col, ix, iy);
+                mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img_col, zona->ix, zona->iy);
             else if (zona->ptr[y][x] == 'E')
-                mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img_exit, ix, iy);
+                mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img_exit, zona->ix, zona->iy);
             else
-                mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img_sp, ix, iy);
+                mlx_put_image_to_window(zona->mlx, zona->mlx_win, zona->img_sp, zona->ix, zona->iy);
             x++;
-            ix +=50;
+            zona->ix +=50;
         }
         y++;
-        iy +=50;
+        zona->iy +=50;
     }
 }
 size_t    init_img(t_data *zona)
@@ -83,27 +82,38 @@ size_t    init_img(t_data *zona)
     return (1);
 }
 
-int    key_event(int keycode, void *param)
+int    key_event(int keycode, t_data *zona)
 {
     static size_t  count = 1;
+    t_point player;
+    size_t j = 0;
+
+    position(zona, &player, 'P');    
     printf("%ld\n", count++);
     if (keycode == 65307) { // Tecla 'Esc' em muitos sistemas
         printf("Tecla 'Esc' pressionada.\n");
-        mlx_loop_end(param); // Encerra o loop principal da janela
-    } else {
+        exit(1); // Encerra o loop principal da janela
+    }
+    else if (keycode == 65363)
+    {
+        zona->ptr[player.y][player.x] = '0';
+        zona->ptr[player.y][player.x+1] = 'P';
+        while(j < zona->point.y)
+        {
+            printf("%s\n", zona->ptr[j]);
+            j++;
+        }
+        open_game(zona, 0, 0);
+    }
+    else {
         printf("Tecla com código %d pressionada.\n", keycode);
     }
     return (0);
 }
 int main(int ac, char **av)
 {
-    int ix;
-    int iy;
-
     (void)ac;
     (void)av;
-    ix = 0;
-    iy = 0;
     t_data  zona;
 
     check_map(&zona);
@@ -115,10 +125,9 @@ int main(int ac, char **av)
         mlx_destroy_window(zona.mlx, zona.mlx_win);
     if (!init_img(&zona))
         printf("Fail Opening\n");
-    open_game(&zona, ix, iy);
-    mlx_key_hook(zona.mlx_win, key_event, zona.mlx);
+    open_game(&zona, 0, 0);
+    mlx_key_hook(zona.mlx_win, key_event, &zona);
     mlx_loop(zona.mlx);
-    
     ft_free(zona.map);
     ft_free(zona.ptr);
     mlx_destroy_window(zona.mlx, zona.mlx_win);
