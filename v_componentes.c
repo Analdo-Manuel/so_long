@@ -6,7 +6,7 @@
 /*   By: almanuel <almanuel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:07:53 by almanuel          #+#    #+#             */
-/*   Updated: 2024/08/15 12:10:29 by almanuel         ###   ########.fr       */
+/*   Updated: 2024/08/17 14:03:45 by almanuel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ void    val_components(t_data *zona)
             if (zona->ptr[iy][ix] == 'E')
                 zona->E++;
             if (zona->ptr[iy][ix] == 'C')
+            {
+                zona->C1++;
                 zona->C++;
+            }
             val_components_2(zona, iy, ix);
             ix++;
         }

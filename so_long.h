@@ -6,7 +6,7 @@
 /*   By: almanuel <almanuel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 12:00:18 by almanuel          #+#    #+#             */
-/*   Updated: 2024/08/16 15:30:37 by almanuel         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:45:40 by almanuel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,18 @@ typedef struct s_data
     char    **ptr;
     char    **map;
     size_t  C;
+    size_t  C1;
     size_t  P;
     size_t  E;
     int     img_x;
     int     img_y;
     int     ix;
     int     iy;
+    int     count;
     t_point     point;
 }              t_data;
 
-void    open_zona(t_data *zona);
+void    open_zona(t_data *zona, char *str);
 void    ft_free(char **str);
 void    map_init(t_data *zona);
 void    messagen_erro(char **str);
@@ -56,6 +58,12 @@ void    val_retangulo(t_data *zona);
 void    val_valuer(t_data *zona);
 void    val_components(t_data *zona);
 void    position(t_data *zona, t_point *position, char c);
+void    event_down(t_data *zona, t_point player);
+void    event_top(t_data *zona, t_point player);
+void    event_left(t_data *zona, t_point player);
+void    event_rigth(t_data *zona, t_point player);
+void    ft_putnbr(int nbr);
+void    ft_putchar(char c);
 
 char    **ft_split(char *str, char c);
 

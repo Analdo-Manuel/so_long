@@ -6,7 +6,7 @@
 /*   By: almanuel <almanuel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:00:13 by almanuel          #+#    #+#             */
-/*   Updated: 2024/08/16 13:13:47 by almanuel         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:23:55 by almanuel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,16 @@ char    **ft_split(char *str, char c)
     ptr[j] = NULL;
     return (ptr);
 }
-void    open_zona(t_data *zona)
+void    open_zona(t_data *zona, char *str1)
 {
     int fd;
     char    str[4096] = {0};
     size_t  s_read;
 
-    fd = open("map.ber", O_RDONLY);
+    fd = open(str1, O_RDONLY);
     if (fd < 0)
     {
-        perror("error de fichero");
+        perror("Error");
         exit (1);
     }
     while ((s_read = read(fd, str, sizeof(str))) > 0)
