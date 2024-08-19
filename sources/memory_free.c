@@ -6,7 +6,7 @@
 /*   By: almanuel <almanuel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:02:37 by almanuel          #+#    #+#             */
-/*   Updated: 2024/08/19 13:23:18 by almanuel         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:03:33 by almanuel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	map_init(t_data *zona)
 	zona->c1 = 0;
 	zona->c = 0;
 	zona->e = 0;
+	zona->e1 = 0;
 	zona->p = 0;
 	zona->img_x = 0;
 	zona->img_y = 0;
