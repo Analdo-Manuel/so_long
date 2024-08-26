@@ -118,7 +118,11 @@ void	open_zona(t_data *zona, char *str1)
 	if (s_read > 0)
 		str[s_read] = '\0';
 	else
-		return ;
+	{
+		write(1, "Error\n", 6);
+		write(1, "empty map\n", 10);
+		exit (1);
+	}
 	zona->ptr = ft_split(str, '\n');
 	close(fd);
 }
